@@ -1,0 +1,50 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.sr-only{
+    position:absolute;
+    left:-10000px;
+    top:auto;
+    width:1px;
+    height:1px;
+    overflow:hidden;  
+}
+
+.navbar {
+    background-color: #e10600;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.navbar-brand img{
+    width: 120px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+}
+
+.contenedor-inicial{
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    height: 100vh;
+}
+
+footer{
+    height: 300px;
+    background-color: #15151d;
+    color: white;
+    padding: 1rem;
+}
+
+footer li{
+    list-style: none;
+    text-align: center;
+}
+
