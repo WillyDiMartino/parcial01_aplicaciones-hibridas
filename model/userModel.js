@@ -1,19 +1,12 @@
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+import mongoose from "mongoose";
 
-const __filename = fileURLToPath(import.meta.url);
+const usersSchema = new mongoose.Schema({
+    name: {type: String, required: true},
+    lastname: {type: String, required: true},
+    username: {type: String, required: true},
+    email: {type: String, required: true},
+    password: {type: String, required: true},
+    role: {type: String}
+});
 
-const userFilePath = path.join(path.dirname(__filename), "../data/users.json");
-
-
-const readUsers = () => {
-    const users = fs.readFileSync(userFilePath, "utf8") 
-    return JSON.parse(users);
-};
-
-const writeUsers = (users) => {
-    fs.writeFileSync(userFilePath, JSON.stringify(users, "utf8"));
-};
-
-export {readUsers, writeUsers};
+export default mongoose.model("users", usersSchema);

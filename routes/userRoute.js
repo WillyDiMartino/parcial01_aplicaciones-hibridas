@@ -7,11 +7,11 @@ dotenv.config();
 
 const userRouter = express.Router();
 
-userRouter.get("/", auth, verificarRol(["admin", "super-admin"]), getAllUsers);
-userRouter.get("/:id", auth, verificarRol(["admin", "super-admin"]), getUserById);
-userRouter.post("/", auth, verificarRol(["admin", "super-admin"]), createUser);
-userRouter.put("/:id", auth, verificarRol(["admin", "super-admin"]), updateUser);
-userRouter.delete("/:id", auth, verificarRol(["admin", "super-admin"]), deleteUser);
+userRouter.get("/", getAllUsers);
+userRouter.get("/:id", getUserById);
+userRouter.post("/", createUser);
+userRouter.put("/:id", updateUser);
+userRouter.delete("/:id", deleteUser);
 userRouter.post("/login", loginUser);
 
 export default userRouter;

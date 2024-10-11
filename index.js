@@ -4,7 +4,14 @@ import driverRoute from './routes/driverRoute.js';
 import teamRoute from './routes/teamRoute.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
+dotenv.config();
+
+mongoose.connect(process.env.MONGODB_URI)
+.then(() => console.log("Conexión exitosa a la base de datos"))
+.catch((error) => console.error("No se pudo conectar a la base de datos", error));
 
 const app = express();
 
