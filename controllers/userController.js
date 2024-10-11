@@ -5,7 +5,8 @@ import jwt from "jsonwebtoken";
 
 dotenv.config();
 
-const secretKey = process.env.SECRET_KEY;
+const secretKey = process.env.SECRET;
+
 
 const getAllUsers = (req, res) => {
     let users = readUsers();
@@ -25,7 +26,7 @@ const getUserById = (req, res) => {
 
 const createUser = async (req, res) => {
 
-    const { name, lastname, username, email, password } = req.body;
+    const { name, lastname, username, email, password, role } = req.body;
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -37,7 +38,8 @@ const createUser = async (req, res) => {
         lastname,
         username,
         email,
-        password: hashedPassword
+        password: hashedPassword,
+        role
     };
     users.push(newUser);
     writeUsers(users);
@@ -85,8 +87,9 @@ const loginUser = async (req, res) => {
     if (!validPassword){
         return res.status(401).json({message: "Contraseña incorrecta"});
     }
-
-    const token = jwt.sign({id: user.id, email: user.email}, secretKey, {expiresIn: "1h"});
+    
+    console.log(secretKey);
+    const token = jwt.sign({id: user.id, email: user.email, role: user.role}, secretKey, {expiresIn: "1h"});
 
     res.status(200).json({token});
 

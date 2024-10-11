@@ -1,1 +1,38 @@
-[{"id":1,"name":"Willy","lastname":"Di Martino","username":"Willy01","email":"willy@gmail.com","password":"$2b$10$jgerVq5Jr3sjqFXwQBF2d.8JF.2tkUVIh5lNFSWsNmLMcv7Cv.r1m"},{"id":2,"name":"Tomás","lastname":"Paravic","username":"Tomas01","email":"tomas@gmail.com","password":"$2b$10$Gw9UkHaWM2N3dWsCHiH0QesehMbekAFlkSxjZhxpBT0saB25GJYoG"}]
+[
+    {
+        "id": 1,
+        "name": "Willy",
+        "lastname": "Di Martino",
+        "username": "Willy01",
+        "email": "willy@gmail.com",
+        "password": "$2b$10$z7r4nrmBt2IdJ5E7LE0reOk7boXQutbEj8.Wsg3sXGXxumQPvcUp6",
+        "role": "super-admin"
+    },
+    {
+        "id": 3,
+        "name": "Homero",
+        "lastname": "Simpson",
+        "username": "MaxPower",
+        "email": "homero@gmail.com",
+        "password": "$2b$10$R4gn2mOS/mhzlH89cqcYPO56CbpCQMJlhUOxV98BG0.qhfrZTW.j.",
+        "role": "admin"
+    },
+    {
+        "id": 4,
+        "name": "Moe",
+        "lastname": "Szyslak",
+        "username": "Moe01",
+        "email": "moe@gmail.com",
+        "password": "$2b$10$q3qkw2XpWfBOjqS0diYym.IKrdnD9oErCq3f1VofHm7xzZ.1cPxAy",
+        "role": "user"
+    },
+    {
+        "id": 5,
+        "name": "Bart",
+        "lastname": "Simpson",
+        "username": "bart01",
+        "email": "bart@gmail.com",
+        "password": "$2b$10$KMskNppk.0KeR77goptDmOVsLPZL4UVVpraeJEiOHVKKZg4YZHFgu",
+        "role": "user"
+    }
+]

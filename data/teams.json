@@ -1,0 +1,80 @@
+[
+    {
+        "id": 1,
+        "name": "McLaren Formula 1 Team",
+        "base": "Woking, United Kingdom",
+        "teamChief": "Andrea Stella",
+        "powerUnit": "Mercedes",
+        "firstEntry": 1966,
+        "constructorPoints": 516,
+        "constructorChampionships": 8,
+        "driverOne": "Lando Noris",
+        "driverTwo": "Oscar Piastri",
+        "logoImg": "mclaren.webp"
+    },
+    {
+        "id": 2,
+        "name": "Oracle Red Bull Racing",
+        "base": "Milton Keynes, United Kingdom",
+        "teamChief": "Christian Horner",
+        "powerUnit": "Honda RBPT",
+        "firstEntry": 1997,
+        "constructorPoints": 475,
+        "constructorChampionships": 6,
+        "driverOne": "Max Verstappen",
+        "driverTwo": "Sergio Perez",
+        "logoImg": "redbull.webp"
+    },
+    {
+        "id": 3,
+        "name": "Ferrari",
+        "base": "Maranello, Italy",
+        "teamChief": "Fred Vasseur",
+        "powerUnit": "Ferrari",
+        "firstEntry": 1950,
+        "constructorPoints": 441,
+        "constructorChampionships": 16,
+        "driverOne": "Charles Leclerc",
+        "driverTwo": "Carlos Sainz Jr.",
+        "logoImg": "ferrari.webp"
+    },
+    {
+        "id": 4,
+        "name": "Mercedes-AMG Petronas Formula One Team",
+        "base": "Brackley, United Kingdom",
+        "teamChief": "Toto Wolff",
+        "powerUnit": "Mercedes",
+        "firstEntry": 1970,
+        "constructorPoints": 329,
+        "constructorChampionships": 8,
+        "driverOne": "Lewis Hamilton",
+        "driverTwo": "George Russell",
+        "logoImg": "mercedes.webp"
+    },
+    {
+        "id": 5,
+        "name": "Aston Martin Aramco Formula One Team",
+        "base": "Silverstone, United Kingdom",
+        "teamChief": "Mike Krack",
+        "powerUnit": "Mercedes",
+        "firstEntry": 2018,
+        "constructorPoints": 86,
+        "constructorChampionships": 0,
+        "driverOne": "Fernando Alonso",
+        "driverTwo": "Lance Stroll",
+        "logoImg": "astonmartin.webp"
+    },
+    {
+        "id": 6,
+        "name": "Williams Racing",
+        "base": "Grove, United Kingdom",
+        "teamChief": "James Vowles",
+        "powerUnit": "Mercedes",
+        "firstEntry": 1978,
+        "constructorPoints": 16,
+        "constructorChampionships": 9,
+        "driverOne": "Franco Colapinto",
+        "driverTwo": "Alexander Albon",
+        "logoImg": "williams.webp"
+    }
+]
