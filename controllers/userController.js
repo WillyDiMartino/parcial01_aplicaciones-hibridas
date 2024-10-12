@@ -37,7 +37,7 @@ const createUser = async (req, res) => {
     try {
         const user = new Users({ ...req.body, password: hashedPassword });
         const usuarioGuardado = await user.save();
-        res.json(usuarioGuardado);
+        res.json({ message: `Usuario ${usuarioGuardado.username} creado`, usuarioGuardado});
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
@@ -46,7 +46,8 @@ const createUser = async (req, res) => {
 const updateUser = async (req, res) => {
     try {
         const updateUser = await Users.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        res.json(updateUser);
+        if (!updateUser) return res.status(404).json({ message: "Usuario no encontrado" });
+        res.json({ message: `Usuario ${updateUser.username} editado`});
     }
     catch (error) {
         res.status(400).json({ error: error.message });
@@ -56,7 +57,8 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
     try {
         const deleteUser = await Users.findByIdAndDelete(req.params.id);
-        res.json(deleteUser);
+        if (!deleteUser) return res.status(404).json({ message: "Usuario no encontrado" });
+        res.json({ message: `Usuario ${deleteUser.username} eliminado`});
     }
     catch (error) {
         res.status(400).json({ error: error.message });

@@ -1,9 +1,10 @@
 import Driver from "../model/driverModel.js";
+import { driverValidate } from "../validations/validation.js";
 
 
 const getAllDrivers = async (req, res) => {
     try {
-        const drivers = await Driver.find();
+        const drivers = await Driver.find().populate('team');
         res.status(200).json(drivers);
     } catch (error) {
         res.status(400).json({ error: error.message });
@@ -13,7 +14,7 @@ const getAllDrivers = async (req, res) => {
 
 const getDriverById = async (req, res) => {
     try {
-        const driver = await Driver.findById(req.params.id);
+        const driver = await Driver.findById(req.params.id).populate('team');
         if (!driver) {
             return res.status(404).json({ message: "Conductor no encontrado" });
         }
@@ -25,10 +26,12 @@ const getDriverById = async (req, res) => {
 
 
 const createDriver = async (req, res) => {
+    const { error } = driverValidate(req.body);
+    if (error) return res.status(400).json({ error: error.details[0].message });
     try {
         const driver = new Driver(req.body);
         const newDriver = await driver.save();
-        res.status(201).json(newDriver);
+        res.status(201).json({ message: "Conductor creado", newDriver });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
@@ -40,7 +43,7 @@ const updateDriver = async (req, res) => {
         if (!updatedDriver) {
             return res.status(404).json({ message: "Conductor no encontrado" });
         }
-        res.status(200).json(updatedDriver);
+        res.status(200).json({ message: "Conductor editado" });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
@@ -58,75 +61,22 @@ const deleteDriver = async (req, res) => {
     }
 };
 
-export { getAllDrivers, getDriverById, createDriver, updateDriver, deleteDriver };
+const searchByName = (req, res) => {
+    const name = req.query.name;
+    if (!name) {
+        return res.status(400).json({ message: "El nombre es requerido para la búsqueda." });
+    }
+    try {
+        const driver =  Driver.find(name).populate('team');
+        if (!driver) {
+            return res.status(404).json({ message: "Conductor no encontrado" });
+        }
+        res.status(200).json(driver);
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({message: error });
+    }
+}
 
-// import { readDrivers, writeDrivers } from "../model/driverModel.js";
 
-// const getAllDrivers = (req, res) => {
-//     let drivers = readDrivers();
-//     res.status(200).json(drivers);
-// };
-
-// const getDriverById = (req, res) => {
-//     const driverId = parseInt(req.params.id);
-//     let drivers = readDrivers();
-//     const driver = drivers.find(d => d.id === driverId);
-//     if(driver) {
-//         res.status(200).json(driver);
-//     }else {
-//         res.status(404).json({message:"No encontramos el conductor que buscas"});
-//     }
-// }
-
-// const createDriver = (req, res) => {
-//     const {name, lastname, team, number, birth, country, raceWins , podiums, points24, grandPrixEntered, worldChampionships, driverImg} = req.body;
-
-//     let drivers = readDrivers();
-
-//     const newDriver = {
-//         id: drivers.length > 0 ? drivers.length + 1 : 1,
-//         name,
-//         lastname,
-//         team,
-//         number,
-//         birth,
-//         country,
-//         raceWins,
-//         podiums,
-//         points24,
-//         grandPrixEntered,
-//         worldChampionships,
-//         driverImg
-//     };
-//     drivers.push(newDriver);
-//     writeDrivers(drivers);
-//     res.status(201).json(newDriver);
-// };
-
-// const updateDriver = (req, res) => {
-//     const driverId = parseInt(req.params.id);
-//     let drivers = readDrivers();
-//     const driverIndex = drivers.findIndex(d => d.id === driverId);
-//     if(driverIndex != -1){
-//         drivers[driverIndex] = {id: driverId, ...req.body};
-//         writeDrivers(drivers);
-//         res.status(200).json(drivers[driverIndex]);
-//     }else{
-//         res.status(404).json({message:"No encontramos el conductor que buscas"});
-//     }
-// };
-
-// const deleteDriver = (req, res) => {
-//     const driverId= parseInt(req.params.id);
-//     let drivers = readDrivers();
-//     const driverIndex = drivers.findIndex(d => d.id === driverId);
-//     if(driverIndex != -1){
-//         drivers = drivers.filter(d => d.id !== driverId);
-//         writeDrivers(drivers);
-//         res.status(200).json({message:"Conductor eliminado"});
-//     }else{
-//         res.status(404).json({message:"No encontramos el conductor que buscas"});
-//     }
-// };
-
-// export { getAllDrivers, getDriverById, createDriver, updateDriver, deleteDriver };
+export { getAllDrivers, getDriverById, createDriver, updateDriver, deleteDriver, searchByName };

@@ -15,3 +15,4 @@ userRouter.delete("/:id", deleteUser);
 userRouter.post("/login", loginUser);
 
 export default userRouter;
+
