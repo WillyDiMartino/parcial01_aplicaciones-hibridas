@@ -1,18 +1,34 @@
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+import mongoose from "mongoose";
 
-const __filename = fileURLToPath(import.meta.url);
+const teamsSchema = new mongoose.Schema({
+    name: {type: String, required: true},
+    base: {type: String, required: true},
+    teamChief: {type: String, required: true},
+    powerUnit: {type: String, required: true},
+    firstEntry: {type: Number, required: true},
+    constructorPoints: {type: Number, required: true},
+    constructorChampionships: {type: Number, required: true},
+    driverOne: {type: String, required: true},
+    driverTwo: {type: String, required: true},
+    logoImg: {type: String, required: true}
+});
 
-const teamFilePath = path.join(path.dirname(__filename), "../data/teams.json");
+export default mongoose.model("teams", teamsSchema);
+// import fs from "fs";
+// import path from "path";
+// import { fileURLToPath } from "url";
 
-const readTeams = () => {
-    const teams = fs.readFileSync(teamFilePath, "utf8")
-    return JSON.parse(teams);
-    };
+// const __filename = fileURLToPath(import.meta.url);
 
-const writeTeams = (teams) => {
-    fs.writeFileSync(teamFilePath, JSON.stringify(teams, "utf8"));
-};
+// const teamFilePath = path.join(path.dirname(__filename), "../data/teams.json");
 
-export {readTeams, writeTeams};
+// const readTeams = () => {
+//     const teams = fs.readFileSync(teamFilePath, "utf8")
+//     return JSON.parse(teams);
+//     };
+
+// const writeTeams = (teams) => {
+//     fs.writeFileSync(teamFilePath, JSON.stringify(teams, "utf8"));
+// };
+
+// export {readTeams, writeTeams};
