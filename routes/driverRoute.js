@@ -10,6 +10,6 @@ driverRouter.get("/:id", getDriverById);
 driverRouter.post("/", createDriver);
 driverRouter.put("/:id", updateDriver);
 driverRouter.delete("/:id", deleteDriver);
-driverRouter.get("/search", searchByName);
+driverRouter.get("/search/lastname", searchByName);
 
 export default driverRouter;

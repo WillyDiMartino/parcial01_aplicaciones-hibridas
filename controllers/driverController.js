@@ -1,7 +1,6 @@
 import Driver from "../model/driverModel.js";
 import { driverValidate } from "../validations/validation.js";
 
-
 const getAllDrivers = async (req, res) => {
     try {
         const drivers = await Driver.find().populate('team');
@@ -10,7 +9,6 @@ const getAllDrivers = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
-
 
 const getDriverById = async (req, res) => {
     try {
@@ -23,7 +21,6 @@ const getDriverById = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
-
 
 const createDriver = async (req, res) => {
     const { error } = driverValidate(req.body);
@@ -67,16 +64,15 @@ const searchByName = (req, res) => {
         return res.status(400).json({ message: "El nombre es requerido para la búsqueda." });
     }
     try {
-        const driver =  Driver.find(name).populate('team');
+        const driver =  Driver.find({name: {$in: name}}).populate('team');
         if (!driver) {
             return res.status(404).json({ message: "Conductor no encontrado" });
         }
         res.status(200).json(driver);
     } catch (error) {
         console.log(error);
-        res.status(400).json({message: error });
+        res.status(400).json({message:error});
     }
 }
-
 
 export { getAllDrivers, getDriverById, createDriver, updateDriver, deleteDriver, searchByName };
