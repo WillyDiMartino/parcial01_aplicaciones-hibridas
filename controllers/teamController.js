@@ -53,4 +53,46 @@ const deleteTeam = async (req, res) => {
     }
 };
 
-export { getAllTeams, getTeamById, createTeam, updateTeam, deleteTeam };
+const searchByTeamName = async (req, res) => {
+    const teamName = req.query.teamname;
+    if (!teamName) {
+        return res.status(400).json({ message: "El nombre del equipo es requerido para la búsqueda." });
+    }
+    try {
+        const team = await Teams.find({ name: new RegExp(teamName, 'i') }).populate('driverOne').populate('driverTwo'); 
+        if (!team || team.length === 0) {
+            return res.status(404).json({ message: "Equipo no encontrado" });
+        }
+        res.status(200).json(team);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Error interno del servidor" });
+    }
+};
+
+const filterByConstructorPoints = async (req, res) => {
+    const { order } = req.query; // Verifica si el query contiene 'asc' o 'desc'
+    let sortOrder = 1; // Valor por defecto para orden ascendente (1)
+
+    if (order === 'desc') {
+        sortOrder = -1; // Cambia el valor para orden descendente (-1)
+    } else if (order === 'asc') {
+        sortOrder = 1; // Valor para orden ascendente
+    }
+
+    try {
+        const teams = await Teams.find().sort({ constructorPoints: sortOrder }).populate('driverOne').populate('driverTwo');
+
+        if (!teams || teams.length === 0) {
+            return res.status(404).json({ message: "No se encontraron equipos." });
+        }
+
+        res.status(200).json(teams);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Error interno del servidor" });
+    }
+};
+
+
+export { getAllTeams, getTeamById, createTeam, updateTeam, deleteTeam, searchByTeamName, filterByConstructorPoints};
