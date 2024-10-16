@@ -5,12 +5,12 @@ import { getAllTeams, getTeamById, createTeam, updateTeam, deleteTeam, searchByT
 
 const teamRouter = express.Router();
 
-teamRouter.get("/", getAllTeams);
-teamRouter.get("/:id", getTeamById);
-teamRouter.post("/", createTeam);
-teamRouter.put("/:id", updateTeam);
-teamRouter.delete("/:id", deleteTeam);
-teamRouter.get("/search/name", searchByTeamName);
-teamRouter.get("/search/constructorPoints", filterByConstructorPoints);
+teamRouter.get("/", auth,  getAllTeams);
+teamRouter.get("/:id", auth,  getTeamById);
+teamRouter.post("/", auth, verificarRol(["admin", "super-admin"]), createTeam);
+teamRouter.put("/:id", auth, verificarRol(["admin", "super-admin"]), updateTeam);
+teamRouter.delete("/:id", auth, verificarRol(["admin", "super-admin"]), deleteTeam);
+teamRouter.get("/search/name", auth,  searchByTeamName);
+teamRouter.get("/search/co auth, nstructorPoints", auth,  filterByConstructorPoints);
 
 export default teamRouter;

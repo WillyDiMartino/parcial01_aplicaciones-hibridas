@@ -24,8 +24,12 @@ const __filename = fileURLToPath(import.meta.url);
 app.use(express.static(path.join(path.dirname(__filename), 'public')));
 app.get('/', (req, res) => {});
 
+app.use('/documentacion', (req, res) => {
+    res.sendFile(path.join(path.dirname(__filename), 'public', 'documentacion.html'));
+});
+
 app.use("/usuarios", userRoute);
-app.use("/corredores", driverRoute);
-app.use("/equipos", teamRoute);
+app.use("/api/corredores", driverRoute);
+app.use("/api/equipos", teamRoute);
 
 app.listen(port, () => console.log(`http://localhost:${port}`));

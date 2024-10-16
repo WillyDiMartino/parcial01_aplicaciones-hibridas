@@ -5,14 +5,14 @@ import { getAllDrivers, getDriverById, createDriver, updateDriver, deleteDriver,
 
 const driverRouter = express.Router();
 
-driverRouter.get("/", getAllDrivers);
-driverRouter.get("/:id", getDriverById);
-driverRouter.post("/", createDriver);
-driverRouter.put("/:id", updateDriver);
-driverRouter.delete("/:id", deleteDriver);
-driverRouter.get("/search/name", searchByName);
-driverRouter.get("/search/lastname", searchByLastName);
-driverRouter.get("/search/points", filterByPoints);
+driverRouter.get("/", auth, getAllDrivers);
+driverRouter.get("/:id", auth,  getDriverById);
+driverRouter.post("/", auth,verificarRol(["admin", "super-admin"]),  createDriver);
+driverRouter.put("/:id", auth,verificarRol(["admin", "super-admin"]),  updateDriver);
+driverRouter.delete("/:id", auth,verificarRol(["admin", "super-admin"]),  deleteDriver);
+driverRouter.get("/search/name", auth,  searchByName);
+driverRouter.get("/search/lastname", auth,  searchByLastName);
+driverRouter.get("/search/points", auth,  filterByPoints);
 
 
 

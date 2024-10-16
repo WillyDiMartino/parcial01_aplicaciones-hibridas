@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Formula 1 API</title>
+</head>
+
+<body>
+    <div class="contenedor-inicial">
+        <header>
+            <h1 class="sr-only">Formula 1 API</h1>
+            <nav class="navbar navbar-expand-lg">
+                <div class=" container container-fluid">
+                    <div class="container">
+                        <a class="navbar-brand" href="index.html">
+                            <img src="img/f1_logo.png" alt="formula uno logo">
+                        </a>
+                    </div>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                            <a class="nav-link" href="/documentacion">Documentación</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <div class="container my-5">
+
+                <h2 class="mb-5">Documentación</h2>
+
+                <h3>Introducción</h3>
+
+                <span>La API de Formula 1 es una API REST que provee información sobre la Fórmula 1. La información que
+                    se puede obtener es la siguiente:</span>
+
+                <ul class=" d-flex justify-content-around my-5 fs-4 btn-doc-hook">
+                    <a href="#pilots">
+                        <li>Información de los pilotos</li>
+                    </a>
+                    <a href="#teams">
+                        <li>Información de los equipos</li>
+                    </a>
+                </ul>
+                   
+<h3 class="mt-4">Una vez iniciada la sesión</h3>
+<span>Las request por <span class="fw-bold">get</span> te darán la siguiente información:</span>
+<pre><span>http://localhost:3000/api/<span class="code-text">corredores</span> (Devuelve la información de todos los pilotos)</span>
+<span>http://localhost:3000/api/<span class="code-text">equipos</span></span> (Devuelve la información de todos los equipos)</pre>
+<section id="pilots">
+<h4>Corredores</h4>
+<span>Para buscar corredores hay distintas maneras:</span>
+<pre><span>http://localhost:3000/api/<span class="code-text">corredores/1234"</span> (Búsqueda por Id único)</span>
+<span>http://localhost:3000/api/<span class="code-text">corredores/search/name?name="lando"</span> (Búsqueda por nombre)</span>
+<span>http://localhost:3000/api/<span class="code-text">corredores/search/lastname?lastname="norris"</span> (Búsqueda por apellido)</span></pre>
+<span>Para Ordenar corredores hay distintas maneras:</span><pre>
+<span>http://localhost:3000/api/<span class="code-text">corredores/search/points?order=asc</span> (Ordena por puntos de manera ascendente)</span>
+<span>http://localhost:3000/api/<span class="code-text">corredores/search/points?order=desc</span> (Ordena por puntos de manera descendiente)</span></pre>
+
+    <pre><h5>Cada objeto tendrá estos datos:</h5><p>{
+        <span class="code-text">"id"</span>: "Id único del piloto",
+        <span class="code-text">"name"</span>: "Nombre del piloto",
+        <span class="code-text">"lastname"</span>: "Apellido del piloto",
+        <span class="code-text">"team"</span>: (Dentro del objeto team se encuentra la
+        información del equipo al que pertenece), {
+            <span class="code-text">"id"</span>: "id único del equipo",
+            <span class="code-text">"name"</span>: "Nombre del equipo",
+            <span class="code-text">"base"</span>: "País de origen del equipo",
+            <span class="code-text">"teamChief"</span>: "Nombre del jefe de equipo",
+            <span class="code-text">"powerUnit"</span>: "Marca del motor",
+            <span class="code-text">"firstEntry"</span>: Año de ingreso a la F1,
+            <span class="code-text">"constructorPoints"</span>: Puntos del equipo en la temporada,
+            <span class="code-text">"constructorChampionships"</span>: Campeonatos de constructores
+            ganados,
+            <span class="code-text">"driverOne"</span>: "Id del piloto 1",
+            <span class="code-text">"driverTwo"</span>: "Id del piloto 2",
+            <span class="code-text">"logoImg"</span>: "url de la imagen del logo del equipo",
+            }
+        <span class="code-text">"number"</span>: "Número del piloto",
+        <span class="code-text">"birth"</span>: Fecha de nacimiento del piloto,
+        <span class="code-text">"country"</span>: "País de origen del piloto",
+        <span class="code-text">"raceWins"</span>: Carreras ganadas por el piloto,
+        <span class="code-text">"podiums"</span>: Podios obtenidos por el piloto,
+        <span class="code-text">"points24"</span>: Puntos obtenidos por el piloto en la temporada,
+        <span class="code-text">"grandPrixEntered"</span>: Grandes premios en los que participó el piloto,
+        <span class="code-text">"worldChampionships"</span>: Campeonatos mundiales ganados por el piloto,
+        <span class="code-text">"driverImg"</span>: "url de la imagen del piloto",
+}</p></pre>
+</section>
+<section id="teams">
+<h4>Equipos</h4>
+<span>Para filtrar los equipos hay distintas maneras:</span>
+<pre><span>http://localhost:3000/api/<span class="code-text">equipo/1234"</span> (Búsqueda por Id único)</span>
+<span>http://localhost:3000/api/<span class="code-text">corredores/search/name?name="mclaren"</span> (Búsqueda por nombre)</span>
+</span></pre><span>Para Ordenar equipos hay distintas maneras:</span><pre>
+<span>http://localhost:3000/api/<span class="code-text">equipos/search/constructorPoints?order=asc</span> (Ordena por puntos de equipo de manera ascendente)</span>
+<span>http://localhost:3000/api/<span class="code-text">equipos/search/constructorPoints?order=desc</span> (Ordena por puntos de equipo manera descendiente)</span></pre>
+<pre><h5>Cada objeto tendrá estos datos:</h5><p>{
+        <span class="code-text">"id"</span>: "Id único del equipo",
+        <span class="code-text">"name"</span>: "Nombre del equipo",
+        <span class="code-text">"base"</span>: "País de origen del equipo",
+        <span class="code-text">"teamChief"</span>: "Nombre del jefe de equipo",
+        <span class="code-text">"powerUnit"</span>: "Marca del motor",
+        <span class="code-text">"firstEntry"</span>: Año de ingreso a la F1,
+        <span class="code-text">"constructorPoints"</span>: Puntos del equipo en la temporada,
+        <span class="code-text">"constructorChampionships"</span>: Campeonatos de constructores ganados,
+        <span class="code-text">"driverOne"</span>: {
+            <span class="code-text">"id"</span>: "Id del piloto 1",
+            <span class="code-text">"name"</span>: "Nombre del piloto 1",
+            <span class="code-text">"lastname"</span>: "Apellido del piloto 1",
+            <span class="code-text">"team"</span>: "Nombre del equipo",
+            <span class="code-text">"number"</span>: Numero del piloto 1,
+            <span class="code-text">"birth"</span>: "Fecha de nacimiento del piloto 1",
+            <span class="code-text">"country"</span>: "País de origen del piloto 1",
+            <span class="code-text">"raceWins"</span>: Carreras ganadas por el piloto 1,
+            <span class="code-text">"podiums"</span>: Podios obtenidos por el piloto 1,
+            <span class="code-text">"points24"</span>: Puntos obtenidos por el piloto 1 en la temporada,
+            <span class="code-text">"grandPrixEntered"</span>: Grandes premios en los que participó el piloto 1,
+            <span class="code-text">"worldChampionships"</span>: Campeonatos mundiales ganados por el piloto 1,
+            <span class="code-text">"driverImg"</span>: "url de la imagen del piloto 1",
+            }
+        <span class="code-text">"driverTwo"</span>: {Mismo objeto que driverOne, con el segundo corredor},
+        <span class="code-text">"logoImg"</span>: "url de la imagen del logo del equipo",
+}</p></pre>
+</section>
+
+
+       </main>
+
+        <footer>
+
+            <div class="d-flex justify-content-around align-items-center">
+                <a href="index.html"><img src="img/f1_logo.png" alt="logo formula 1"></a>
+                <ul>
+                    <span>Alumnos:</span>
+                    <li>Guillermo Di Martino</li>
+                    <li>Tomás Paravic</li>
+                </ul>
+                <ul>
+                    <span>Profesora:</span>
+                    <li>Camila Belén Márcos Galbán</li>
+                </ul>
+                <ul>
+                    <span>Materia:</span>
+                    <li>Aplicaciones Híbridas</li>
+                    <span>Comisión:</span>
+                    <li>DWN4AV</li>
+                </ul>
+            </div>
+
+            <p>&copy; 2021 Formula 1 API - Di Martino - Paravic</p>
+
+        </footer>
+    </div>
+</body>
+
+</html>
