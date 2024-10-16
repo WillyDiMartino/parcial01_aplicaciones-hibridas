@@ -70,14 +70,14 @@ const searchByTeamName = async (req, res) => {
     }
 };
 
-const filterByConstructorPoints = async (req, res) => {
-    const { order } = req.query; // Verifica si el query contiene 'asc' o 'desc'
-    let sortOrder = 1; // Valor por defecto para orden ascendente (1)
+const sortByConstructorPoints = async (req, res) => {
+    const { order } = req.query; 
+    let sortOrder = 1; 
 
     if (order === 'desc') {
-        sortOrder = -1; // Cambia el valor para orden descendente (-1)
+        sortOrder = -1; 
     } else if (order === 'asc') {
-        sortOrder = 1; // Valor para orden ascendente
+        sortOrder = 1; 
     }
 
     try {
@@ -95,4 +95,4 @@ const filterByConstructorPoints = async (req, res) => {
 };
 
 
-export { getAllTeams, getTeamById, createTeam, updateTeam, deleteTeam, searchByTeamName, filterByConstructorPoints};
+export { getAllTeams, getTeamById, createTeam, updateTeam, deleteTeam, searchByTeamName, sortByConstructorPoints};

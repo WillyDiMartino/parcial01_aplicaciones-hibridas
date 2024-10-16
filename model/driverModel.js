@@ -3,7 +3,7 @@ import mongoose, { Schema } from "mongoose";
 const driverSchema = new mongoose.Schema({
     name: { type: String, required: true },
     lastname: { type: String, required: true },
-    team: {type: Schema.Types.ObjectId, ref: "teams"},
+    team: {type: Schema.Types.ObjectId, ref: "teams", default: null},
     number: { type: Number, required: true },
     birth: { type: Date, required: true },
     country: { type: String, required: true },

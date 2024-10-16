@@ -30,12 +30,12 @@ const getUserById = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-    const { password } = req.body;
+    const { name, lastname, username, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
     const { error } = usersValidate(req.body);
     if (error) return res.status(400).json({ error: error.details[0].message });
     try {
-        const user = new Users({ ...req.body, password: hashedPassword });
+        const user = new Users({ name, lastname, username, email, password: hashedPassword });
         const usuarioGuardado = await user.save();
         res.json({ message: `Usuario ${usuarioGuardado.username} creado`, usuarioGuardado});
     } catch (error) {

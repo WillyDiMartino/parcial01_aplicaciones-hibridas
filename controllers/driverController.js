@@ -1,4 +1,5 @@
 import Driver from "../model/driverModel.js";
+import Team from "../model/teamModel.js";
 import { driverValidate } from "../validations/validation.js";
 
 const getAllDrivers = async (req, res) => {
@@ -94,7 +95,7 @@ const searchByLastName = async (req, res) => {
     }
 };
 
-    const filterByPoints = async (req, res) => {
+    const sortByPoints = async (req, res) => {
         const { order } = req.query; 
         let sortOrder = 1;
     
@@ -118,6 +119,31 @@ const searchByLastName = async (req, res) => {
         }
     };
 
+    
+    const filterByRaceWins = async (req, res) => {
+        try {
+            const drivers = await Driver.find({ raceWins: { $gt: 0 } }).populate('team');
+            if (!drivers || drivers.length === 0) {
+                return res.status(404).json({ message: "No se encontraron conductores con una victoria." });
+            }
+            res.status(200).json(drivers);
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ message: "Error interno del servidor" });
+        }
+    };
 
+    const filterByWorldChampionship = async (req, res) => {
+        try {
+            const drivers = await Driver.find({  worldChampionships: { $gt: 0 } }).populate('team');
+            if (!drivers || drivers.length === 0) {
+                return res.status(404).json({ message: "No se encontraron conductores con un campeonato ganado." });
+            }
+            res.status(200).json(drivers);
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ message: "Error interno del servidor" });
+        }
+    };
 
-export { getAllDrivers, getDriverById, createDriver, updateDriver, deleteDriver, searchByName, searchByLastName, filterByPoints};
+export { getAllDrivers, getDriverById, createDriver, updateDriver, deleteDriver, searchByName, searchByLastName, sortByPoints, filterByRaceWins, filterByWorldChampionship};

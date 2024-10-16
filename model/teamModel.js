@@ -8,9 +8,10 @@ const teamsSchema = new mongoose.Schema({
     firstEntry: {type: Number, required: true},
     constructorPoints: {type: Number, required: true},
     constructorChampionships: {type: Number, required: true},
-    driverOne: {type: Schema.Types.ObjectId, ref: "Driver"},
-    driverTwo: {type: Schema.Types.ObjectId, ref: "Driver"},
+    driverOne: {type: Schema.Types.ObjectId, ref: "Driver", default: null},
+    driverTwo: {type: Schema.Types.ObjectId, ref: "Driver", default: null},
     logoImg: {type: String, required: true}
 });
 
 export default mongoose.model("teams", teamsSchema);
+ null
